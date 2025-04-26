@@ -1,0 +1,180 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: rgb(0, 0, 53);
+    color: white;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+}
+
+.icon-link {
+    font-size: 1.3rem;
+    margin-left: 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+.icon-link:hover {
+    color: #007bff;
+}
+
+header {
+    background-color: rgb(139, 3, 212);
+}
+
+.site-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.5rem;
+    background-color: rgb(139, 3, 212);
+}
+
+@media (min-width: 300px) {
+    .site-header {
+        flex-direction: row;
+    }
+}
+
+.home {
+    display: flex;
+}
+
+.home br {
+    height: 0cap;
+}
+
+.icon {
+    margin: 1rem;
+    margin-right: 3rem;
+}
+
+main hr {
+    border: 0;
+    background-color: violet;
+    height: 1.2px;
+    margin: 40px 84px;
+}
+
+.firstSection {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 3rem;
+}
+
+.firstSection>div {
+    width: 40%;
+}
+
+.left {
+    font-size: 3rem;
+}
+
+.left img {
+    background-color: white;
+    padding: 2px;
+}
+
+.right img {}
+
+.purple {
+    color: blueviolet;
+}
+
+.secondSection {
+
+    margin: 0px 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.secondSection a {
+
+    text-decoration: none;
+    color: blueviolet;
+}
+
+.thirdSection {}
+
+.thirdSection h4 {
+    align-content: center;
+    color: blueviolet;
+    font-size: 3rem;
+    margin-left: 7rem;
+    margin-right: 7rem;
+}
+
+form {
+    margin-left: 7rem;
+    margin-right: 7rem;
+    display: flex;
+    padding: 3px;
+    gap: 0.5rem;
+    flex-direction: column;
+}
+
+input {}
+
+.thirdSection p {
+    text-justify: auto;
+    margin-left: 7rem;
+    margin-right: 7rem;
+}
+
+
+.hidden {
+    display: none;
+}
+
+/* #popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    max-width: 300px;
+    font-family: Arial, sans-serif;
+} */
+
+.popup-content button {
+    margin-top: 10px;
+    color: blue;
+}
+
+#popup {
+    position: fixed;
+    top: 30px;
+    right: 40%;
+    background-color: blueviolet;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    max-width: 300px;
+    font-family: Arial, sans-serif;
+    display: none; /* Ensure it's hidden by default */
+}
+  
+  #popup.show {
+    display: block; /* Show when the class is added */
+  }
+  
+  .popup-content button {
+    margin-top: 10px;
+}
+  
