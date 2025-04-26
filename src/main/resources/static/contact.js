@@ -7,7 +7,7 @@ form.addEventListener('submit', async (e) => {
   const formData = new FormData(form); // works with @ModelAttribute
 
   try {
-    const response = await fetch('http://shrysthshukla-porfolio.ap-south-1.elasticbeanstalk.com/contact', {
+    const response = await fetch('https://portfolio-production-e964.up.railway.app/contact', {
       method: 'POST',
       body: formData
     });
