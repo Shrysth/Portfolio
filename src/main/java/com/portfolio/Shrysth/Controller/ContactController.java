@@ -37,7 +37,7 @@ public ResponseEntity<String> sendContactEmail(@ModelAttribute ContactForm conta
                         "\n" + //
                         "Best regards,\n" + //
                         "Shrysth Shukla";
-        emailService.sendEmail(contactForm.getEmail(), subject2, body2, "siddshrysth@gmail.com");
+        emailService.sendEmail(contactForm.getEmail(), subject2, body2, contactForm.getEmail());
         return ResponseEntity.ok("email sent");
     } catch (Exception e) {
         return ResponseEntity.status(500).body(e.getMessage());
