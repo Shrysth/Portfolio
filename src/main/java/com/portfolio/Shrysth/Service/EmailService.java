@@ -16,7 +16,7 @@ public class EmailService {
     public void sendEmail(String to, String subject, String body, String replyTo) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("siddshrysth@gmail.com");
-        message.setTo("shrysthshukla@yahoo.com");
+        message.setTo(to);
     
         message.setSubject(subject);
         message.setText(body);
