@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(form);
 
         try {
-            const response = await fetch('http://localhost:5000/contact', {
+            const response = await fetch('https://portfolio-899j.onrender.com/contact', {
                 method: 'POST',
                 body: formData
             });
