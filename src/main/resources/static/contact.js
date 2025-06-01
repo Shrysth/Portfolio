@@ -1,35 +1,67 @@
-const form = document.getElementById('contactForm');
-const popup = document.getElementById('popup');
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    const popup = document.getElementById('popup');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const sendText = submitBtn.querySelector('.send-text');
+    const spinner = submitBtn.querySelector('.spinner-border');
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        sendText.textContent = 'Sending...';
+        spinner.classList.remove('d-none');
 
-  const formData = new FormData(form); // works with @ModelAttribute
+        const formData = new FormData(form);
 
-  try {
-    const response = await fetch('https://portfolio-production-d593.up.railway.app/contact', {
-      method: 'POST',
-      body: formData
+        try {
+            const response = await fetch('http://localhost:5000/contact', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                showPopup('Thank you for reaching out! I\'ll get back to you soon.', 'success');
+                form.reset();
+            } else {
+                const text = await response.text();
+                showPopup(text || 'Something went wrong. Please try again.', 'error');
+            }
+        } catch (err) {
+            console.error(err);
+            showPopup('Network error. Please check your connection and try again.', 'error');
+        } finally {
+            // Reset button state
+            submitBtn.disabled = false;
+            sendText.textContent = 'Send Message';
+            spinner.classList.add('d-none');
+        }
     });
 
-    if (response.ok) {
-      showPopup(); // 🎉 Thank-you popup!
-      form.reset();
-    } else {
-      const text = await response.text();
-      alert(text);
+    function showPopup(message, type) {
+        // Set popup content and style based on type
+        popup.innerHTML = `
+            <div class="popup-content">
+                <p>${message}</p>
+                <button onclick="closePopup()">Close</button>
+            </div>
+        `;
+        
+        if (type === 'error') {
+            popup.style.backgroundColor = 'rgba(220, 53, 69, 0.9)';
+        } else {
+            popup.style.backgroundColor = 'rgba(138, 43, 226, 0.9)';
+        }
+        
+        popup.classList.add('show');
+        setTimeout(() => {
+            popup.classList.remove('show');
+        }, 5000);
     }
-  } catch (err) {
-    console.error(err);
-    alert(err);
-  }
+
+    window.closePopup = function() {
+        popup.classList.remove('show');
+        popup.style.backgroundColor = 'rgba(138, 43, 226, 0.9)';
+    };
 });
-
-function showPopup() {
-  popup.classList.add('show'); // Show the popup
-  setTimeout(() => popup.classList.remove('show'), 5000); // Hide after 5 seconds
-}
-
-function closePopup() {
-  popup.classList.remove('show'); // Ensure the popup is closed when clicked
-}
