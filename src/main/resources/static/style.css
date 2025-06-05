@@ -1,7 +1,7 @@
 :root {
     --primary-color: rgb(139, 3, 212);
     --primary-dark: rgb(88, 0, 134);
-    --secondary-color: #8a2be2;
+    --secondary-color: #AB63F7; /* Further lightened for link contrast */
     --text-color: #ffffff;
     --text-muted: rgba(255, 255, 255, 0.7);
     --bg-color: rgb(0, 0, 53);
@@ -23,8 +23,8 @@ body {
 /* Header Styles */
 .site-header {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    flex-direction: column; /* This is overridden by media query for wider screens to be row */
+    gap: 1rem; /* Increased from 0.5rem for better spacing, applies to row view too if items are close */
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
@@ -82,10 +82,15 @@ body {
     background: rgba(255, 255, 255, 0.1);
 }
 
-.icon-link:hover {
+.icon-link:hover, .icon-link:focus {
     color: white;
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-3px);
+}
+.icon-link:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+    background: rgba(255, 255, 255, 0.25); /* Slightly more prominent */
 }
 
 /* Main Content Styles */
@@ -119,9 +124,15 @@ body {
     transition: var(--transition);
 }
 
-.resume-btn:hover {
+.resume-btn:hover, .resume-btn:focus {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-3px);
+}
+.resume-btn:focus {
+    background: rgba(255, 255, 255, 0.15); /* Slightly more prominent */
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 8px rgba(171, 99, 247, 0.5); /* Adjusted for new --secondary-color */
 }
 
 .right {
@@ -149,7 +160,7 @@ body {
 
 .content-divider {
     border: 0;
-    background: rgba(138, 43, 226, 0.3);
+    background: rgba(171, 99, 247, 0.3); /* Adjusted for new --secondary-color */
     height: 1px;
     margin: 30px 0;
 }
@@ -179,8 +190,17 @@ body {
 
 .nav-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+    box-shadow: 0 5px 15px rgba(171, 99, 247, 0.3); /* Adjusted for new --secondary-color */
     background: white;
+    color: var(--primary-dark); /* Ensure text is readable on white background */
+}
+.nav-btn a:focus {
+    /* The parent .nav-btn:hover handles background and color change. */
+    /* We need to ensure the link itself shows a focus ring that's visible over the changed background. */
+    outline: 2px solid var(--primary-dark); /* Using primary-dark as it contrasts with white background */
+    outline-offset: 3px; /* Offset to clear the button's edge */
+    border-radius: inherit; /* Match parent button's radius */
+    /* Optional: A subtle shadow on the link might be too much if parent has shadow. Outline is key. */
 }
 
 /* Content Sections */
@@ -243,7 +263,8 @@ body {
     color: var(--secondary-color);
     margin-bottom: 1rem;
     font-size: 1.2rem;
-    border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+    font-weight: bold; /* Explicitly set bold for Lighthouse */
+    border-bottom: 1px solid rgba(171, 99, 247, 0.3); /* Adjusted for new --secondary-color */
     padding-bottom: 0.5rem;
 }
 
@@ -284,8 +305,14 @@ body {
     transition: var(--transition);
 }
 
-.experience-link:hover::after, .project-link:hover::after {
+.experience-link:hover::after, .project-link:hover::after,
+.experience-link:focus::after, .project-link:focus::after {
     width: 100%;
+}
+.experience-link:focus, .project-link:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 3px;
+    border-radius: 2px;
 }
 
 .tech-used {
@@ -346,7 +373,7 @@ body {
 
 /* Specific icon colors for brand icons */
 .fa-html5 { color: #e34f26; }
-.fa-css3-alt { color: #264de4; }
+.fa-css3-alt { color: #2E86C1; } /* Changed from #264de4 for better contrast */
 .fa-js-square { color: #f7df1e; }
 .fa-react { color: #61dafb; }
 .fa-java { color: #007396; }
@@ -384,7 +411,8 @@ body {
 .form-control:focus {
     outline: none;
     border-color: var(--secondary-color);
-    box-shadow: 0 0 0 0.25rem rgba(138, 43, 226, 0.25);
+    /* Updated for new --secondary-color derived RGBA value */
+    box-shadow: 0 0 0 0.25rem rgba(171, 99, 247, 0.35);
 }
 
 textarea.form-control {
@@ -410,7 +438,13 @@ textarea.form-control {
 .btn-send:hover {
     background-color: var(--primary-dark);
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+    box-shadow: 0 5px 15px rgba(171, 99, 247, 0.4); /* Adjusted for new --secondary-color */
+}
+.btn-send:focus {
+    background-color: var(--primary-dark); /* Match hover */
+    outline: 2px solid var(--text-color); /* White outline on dark button */
+    outline-offset: 2px;
+    box-shadow: 0 0 8px rgba(88, 0, 134, 0.5); /* --primary-dark with opacity */
 }
 
 .btn-send:active {
@@ -457,7 +491,7 @@ textarea.form-control {
 
 .popup-content button {
     background: white;
-    color: var(--secondary-color);
+    color: var(--primary-dark); /* Changed from --secondary-color for better contrast */
     border: none;
     padding: 8px 16px;
     border-radius: 4px;
@@ -466,9 +500,14 @@ textarea.form-control {
     font-weight: 500;
 }
 
-.popup-content button:hover {
+.popup-content button:hover, .popup-content button:focus {
     background: #f0f0f0;
     transform: translateY(-2px);
+}
+.popup-content button:focus {
+    background: #e0e0e0; /* Darken hover bg slightly for focus */
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 1px;
 }
 
 /* Footer */
@@ -496,9 +535,14 @@ footer {
     transition: var(--transition);
 }
 
-.footer-links a:hover {
+.footer-links a:hover, .footer-links a:focus {
     color: var(--secondary-color);
     transform: translateY(-3px);
+}
+.footer-links a:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+    border-radius: 3px; /* Slight radius for text links */
 }
 
 .copyright {
